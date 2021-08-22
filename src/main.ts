@@ -3,7 +3,6 @@ import {createLogger} from "./commons/logger";
 import * as dotenv from "dotenv"
 import * as fs from 'fs'
 import * as path from "path";
-import {DiscordEventListener} from "./domain/DiscordEventListener";
 
 dotenv.config() // Read .env file into Environment Variables (process.env...)
 
