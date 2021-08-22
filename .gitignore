@@ -1,0 +1,8 @@
+# IDE-specific paths
+.idea/
+
+# Secrets and other runtime variables
+.env
+
+# Vendored dependencies
+node_modules/
