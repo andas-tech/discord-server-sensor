@@ -1,5 +1,5 @@
 import {createLogger} from "../commons/logger"
-import {DiscordEventListener} from "../DiscordEventListener";
+import {DiscordEventListener} from "../domain/DiscordEventListener";
 import {ingestMessage} from "../services/fattypipes";
 import {Message} from "discord.js";
 
