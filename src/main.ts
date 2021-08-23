@@ -30,7 +30,6 @@ const main = () => {
 
     const botClient = new Client({intents})
     botClient.login(process.env.DISCORD_API_TOKEN).then(() => {
-        botClient.once('ready', () => logger.info(`bot ready: intents=${JSON.stringify(intents)}`))
         moduleLocations.forEach((location) => {
             const modulePath = path.join(__dirname, location)
             fs.readdir(modulePath, (err, files) => {
@@ -56,6 +55,7 @@ const main = () => {
             })
         })
     }).catch((err) => logger.error(err));
+    botClient.once('ready', () => logger.info(`bot ready: intents=${JSON.stringify(intents)}`))
 }
 
 // Kick out the epic...
