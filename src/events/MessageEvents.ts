@@ -1,4 +1,4 @@
-import {createLogger} from "../commons/logger"
+import {createLogger} from "../commons/Logger"
 import {DiscordEventListener} from "../domain/DiscordEventListener";
 
 import {Message, Presence} from "discord.js";

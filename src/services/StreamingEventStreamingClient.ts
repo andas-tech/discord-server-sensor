@@ -4,7 +4,7 @@ Streaming Event Streaming service --
 a kafka integration for discord messages
  */
 
-import {createLogger} from "../commons/logger";
+import {createLogger} from "../commons/Logger";
 import {Message, Presence} from "discord.js";
 import {KafkaClient, Producer} from "kafka-node";
 import {
