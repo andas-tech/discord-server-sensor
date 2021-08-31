@@ -7,12 +7,8 @@ a kafka integration for discord messages
 import {createLogger} from "../commons/Logger";
 import {Message, Presence} from "discord.js";
 import {KafkaClient, Producer} from "kafka-node";
-import {
-    KAFKA_TOPIC_DISCORD_MESSAGE_CREATE,
-    KAFKA_TOPIC_DISCORD_MESSAGE_FALLTHROUGH, KAFKA_TOPIC_DISCORD_MESSAGE_UPDATE,
-    KAFKA_TOPIC_DISCORD_PRESENCE_UPDATE,
-    MESSAGE_CREATE, MESSAGE_UPDATE
-} from "../constants";
+import {MESSAGE_CREATE, MESSAGE_UPDATE} from "../constants";
+import {DiscordKafkaTopics} from 'streaming-event-streaming';
 
 const logger = createLogger("StreamingEventStreamingClient")
 const kafkaHost = process.env.KAFKA_HOST
@@ -22,7 +18,7 @@ type ValidTypes = Message | Presence
 export const ingestMessage = (message: ValidTypes, nuance?: string) => {
     if (message instanceof Message) {
         if (nuance === MESSAGE_CREATE) {
-            publish(KAFKA_TOPIC_DISCORD_MESSAGE_CREATE, JSON.stringify(message))
+            publish(DiscordKafkaTopics.KAFKA_TOPIC_DISCORD_MESSAGE_CREATE, JSON.stringify(message))
             return
         }
         if (nuance === MESSAGE_UPDATE) {
@@ -42,24 +38,24 @@ const publish = (topic: string, message: string) => {
     const producer = new Producer(client)
     producer.on("ready", () => client.refreshMetadata(
         [topic], (err) => {
-        if (err) {
-            logger.error(err)
-            return
-        }
-
-
-        producer.send([
-            {
-                topic,
-                messages: [message]
-            }
-        ], (err => {
             if (err) {
                 logger.error(err)
                 return
             }
+
+
+            producer.send([
+                {
+                    topic,
+                    messages: [message]
+                }
+            ], (err => {
+                if (err) {
+                    logger.error(err)
+                    return
+                }
+            }))
         }))
-    }))
 
     producer.on("error", (err) => logger.error(err))
 }

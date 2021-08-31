@@ -1,4 +1,4 @@
-import {Client, Intents, Interaction} from "discord.js";
+import {Client, Intents} from "discord.js";
 import {createLogger} from "./commons/Logger";
 import * as dotenv from "dotenv"
 import * as fs from 'fs'

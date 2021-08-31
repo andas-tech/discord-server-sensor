@@ -1,5 +1,5 @@
 {
-  "name": "gaming-discord-bot",
+  "name": "@andas/discord-server-sensor",
   "description": "Discord bot based on Adonis.js and Typescript for Gaming streamers",
   "version": "1.0.0",
   "main": "index.js",
@@ -29,10 +29,12 @@
     "dotenv": "^10.0.0",
     "kafka-node": "^5.0.0",
     "pino": "^7.0.0-rc.3",
+    "streaming-event-streaming": "github:andas-tech/streaming-event-streaming",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
     "ts-node-dev": "^1.1.8"
   }
 }
